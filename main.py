@@ -41,7 +41,7 @@ execButton = Button(root, text="Exec", width=10, command=execBtn).place(x=100, y
 
 L1 = Label(root, text="Text")
 L1.place(x=10, y=50)
-E1 = Entry(root, width=50)
+E1 = Entry(root, width=20)
 E1.place(x=50, y=50)
 
 L2 = Label(root, text="Hash")
