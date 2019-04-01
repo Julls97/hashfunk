@@ -1,37 +1,52 @@
-from tkinter import *
+def a1():
+    print("алгоритм RSA")
+    e = 5
+    n = 91
+    d = 29
 
-root = Tk()
-root.title("Hash")
-root.geometry('200x200')
+    k = 11
+    r = pow(k, e) % n
+    # print(r)
+    new_k = pow(r, d) % n
+    # print(new_k)
+    print("ok") if k == new_k else print("not ok")
 
-openButton = Button(root, text="Open", width=10).place(x=10, y=10)
-execButton = Button(root, text="Exec", width=10).place(x=100, y=10)
 
-L1 = Label(root, text="Text")
-L1.place(x=10, y=50)
-E1 = Entry(root, width=20)
-E1.place(x=50, y=50)
+def a2():
+    print("алгоритм Клауса Шнорра")
+    p = 23
+    q = 11
+    x = 8
+    g = 3
+    y = 4
+    k = 10
+    r = pow(g, k) % p
+    # print(r)
+    e = 4
+    s = (k + x * e) % q
+    # print(s)
+    new_r = (pow(g, s) * pow(y, e)) % p
+    # print(new_r)
+    print("ok") if r == new_r else print("not ok")
 
-L2 = Label(root, text="Hash")
-L2.place(x=10, y=100)
-E2 = Entry(root)
-E2.place(x=50, y=100)
 
-p = 12
-q = 27
-n = p * q
-f = (p - 1) * (q - 1)
-e = 17
-d = (1 / e) % f
-# x = tuple(e, n)
-# y = tuple(d, n)
-
-m = 11111
-c = pow(m, e) % n
-print(c)
-new_m = pow(c, d) % n
-print(new_m)
-
-print("ok") if m == new_m else print("not ok")
-
-root.mainloop()
+def a3():
+    import random
+    print("алгоритм Клауса Шнорра")
+    p = 5
+    q = 7
+    n = 35
+    v = 16
+    s = 9
+    r = 18
+    z = pow(r, 2) % n
+    # print(z)
+    b = random.randint(0, 1)
+    if b != 0:
+        y = (r * s) % n
+        # print(y)
+        new_z = (pow(y, 2) * v) % n
+    else:
+        new_z = pow(r, 2) % n
+    # print(new_z)
+    print("ok") if z == new_z else print("not ok")
