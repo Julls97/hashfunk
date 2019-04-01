@@ -102,12 +102,64 @@ def d2():
     print("Восстановленное слово -", ''.join(letters))
 
 
+# import lagrange
+from scipy.interpolate import lagrange
+from numpy.polynomial.polynomial import Polynomial
+
+
 def d3():
     print("Разделение секрета по схеме Шамира")
     S = alphabet.find(text[0]) + 1
+    print("S =", S)
+    # S = 11
     m = 3
     n = 5
     p = 59
-    
+    a1 = 23
+    a2 = 10
 
-d3()
+    y = []
+    for x in range(1, n + 1):
+        y.append([x, (a2 * pow(x, 2) + a1 * x + S) % p])
+    # print(y)
+
+    poly = lagrange([y[1][0], y[2][0], y[4][0]], [y[1][1], y[2][1], y[4][1]])
+    S_ = int(Polynomial(poly).coef[2]) % p
+    print("S_ =", S_)
+    print("ok") if S == S_ else print("not ok")
+
+
+def d4():
+    print("Разделение секрета по схеме Асмута-Блума")
+    # S = 11
+    S = alphabet.find(text[0]) + 1
+    print("S =", S)
+    m = 3
+    n = 5
+    p = 13
+    d = [17, 20, 23, 29, 37]
+
+    r = 30
+    if r > (d[0] * d[1] * d[3] - S) / p:
+        print("Wrong r")
+        return False
+
+    S_ = S + r * p
+    # print("S_ =", S_)
+
+    y = []
+    for i in range(0, len(d)):
+        y.append([d[i], S_ % d[i]])
+    # print(y)
+    D = d[1] * d[2] * d[4]
+    # print(D)
+    D_ = [D / d[1], D / d[2], D / d[4]]
+    # print(D_)
+    D_invert = [11, 6, 7]
+
+    S_ = (y[1][1] * D_[0] * D_invert[0] + y[2][1] * D_[1] * D_invert[1] + y[4][1] * D_[2] * D_invert[2]) % D
+    print("S_ % p =", S_ % p)
+    print("ok") if S == S_ % p else print("not ok")
+
+
+d4()
