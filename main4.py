@@ -1,9 +1,8 @@
 from collections import namedtuple
 
+text1 = "КИРИЛЛОВА"
 text = "кириллова"
-# text = "код"
 alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
-
 
 def d1():
     print("Тайные многосторонние вычисления")
@@ -35,12 +34,10 @@ def d1():
     avg_salary = (c_decode - x) / 3
     print("Средняя зарплата =", avg_salary)
 
-
 def text_to_bin(text, list):
     for letter in text:
         bin_code = bin(int(letter.encode("Windows-1251").hex(), 16))[2:].zfill(8)
         list.append([letter, bin_code])
-
 
 def bin_to_text(list):
     letters = []
@@ -49,11 +46,9 @@ def bin_to_text(list):
         letters.append(letter)
     return letters
 
-
 gamma1_codes = []
 gamma2_codes = []
 gamma3_codes = []
-
 
 def encode(codes):
     result = []
@@ -72,11 +67,10 @@ def encode(codes):
         result.append([i, buff])
     return result
 
-
 def d2():
     print("Разбиение секрета с использование гаммирования")
 
-    secret = text[:3]
+    secret = text1[:3]
     print("Кодирование секрета – слово '", secret, "'")
     gamma1 = 'юля'
     gamma2 = 'шар'
@@ -101,11 +95,8 @@ def d2():
     letters = bin_to_text(decode)
     print("Восстановленное слово -", ''.join(letters))
 
-
-# import lagrange
 from scipy.interpolate import lagrange
 from numpy.polynomial.polynomial import Polynomial
-
 
 def d3():
     print("Разделение секрета по схеме Шамира")
@@ -124,10 +115,10 @@ def d3():
     # print(y)
 
     poly = lagrange([y[1][0], y[2][0], y[4][0]], [y[1][1], y[2][1], y[4][1]])
+    # print(poly)
     S_ = int(Polynomial(poly).coef[2]) % p
     print("S_ =", S_)
     print("ok") if S == S_ else print("not ok")
-
 
 def d4():
     print("Разделение секрета по схеме Асмута-Блума")
@@ -160,6 +151,5 @@ def d4():
     S_ = (y[1][1] * D_[0] * D_invert[0] + y[2][1] * D_[1] * D_invert[1] + y[4][1] * D_[2] * D_invert[2]) % D
     print("S_ % p =", S_ % p)
     print("ok") if S == S_ % p else print("not ok")
-
 
 d4()
